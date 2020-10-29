@@ -11,9 +11,11 @@
 #### 1、开发板接上电源和仿真器，烧录程序。
 #### 2、按一下按键模块的"复位"按键，程序开始运行，按"K_DOWN"进行功能切换，
 ##### 功能1：显示时间、经纬度、海拔等信息；
-在空旷位置，首次定位时间较长，可能需要几分钟的时间。fix mode:3D 代表定位成功。 定位成功以后才能切换到功能2。
-![image](https://github.com/freepoet/GPS_demo/blob/main/test.jpg)
-##### 功能2：轨迹绘制；
+在空旷位置，首次定位时间较长，可能需要几分钟的时间。<br>
+fix mode:3D 代表定位成功。 定位成功以后才能切换到功能2。
+
+![image](https://github.com/freepoet/GPS_demo/blob/main/demo_images/test.jpg)
+##### 功能2：轨迹绘制（*有待完善*）；
 
 
 
