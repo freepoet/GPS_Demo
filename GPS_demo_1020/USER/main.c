@@ -30,7 +30,7 @@ void Gps_Msg_Show(void)
 {
  	float tp;		   
 	 	POINT_COLOR=GREEN;
-	LCD_ShowString(30,20,200,16,16,"STM32F4：NE0-6M GPS TEST");	
+	LCD_ShowString(30,20,200,16,16,"STM32F4NE0-6M GPS TEST");	
 	LCD_ShowString(30,40,200,16,16,"Version：1.0");	
 	LCD_ShowString(30,60,200,16,16,"Mode   :null");
 	//KEY1也就是KEY_DOWN进行功能切换，默认为位置高度速度等显示，按一下切换到运动轨迹绘制
@@ -152,9 +152,9 @@ int main(void)
  			USART3_RX_STA=0;		   	//启动下一次接收
 			USART1_TX_BUF[i]=0;			//自动添加结束符
 			GPS_Analysis(&gpsx,(u8*)USART1_TX_BUF);//分析字符串
-			if(flag_draw)
-				Draw_Path();    //绘制轨迹
-			else
+			//if(flag_draw)
+				//Draw_Path();    //绘制轨迹
+			//else
 				Gps_Msg_Show();				//显示信息
 
 			if(upload)printf("\r\n%s\r\n",USART1_TX_BUF);//发送接收到的数据到串口1

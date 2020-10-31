@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OBJ\GPS.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\GPS.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Wed Oct 21 23:30:31 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Sat Oct 31 10:06:38 2020
 <BR><P>
 <H3>Maximum Stack Usage =        372 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -449,7 +449,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;distance
 </UL>
 
-<P><STRONG><a name="[ae]"></a>distance</STRONG> (Thumb, 708 bytes, Stack size 136 bytes, main.o(.text), UNUSED)
+<P><STRONG><a name="[ae]"></a>distance</STRONG> (Thumb, 704 bytes, Stack size 136 bytes, main.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_hypot
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
@@ -459,17 +459,13 @@ Global Symbols
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
 
-<P><STRONG><a name="[b3]"></a>Draw_Path</STRONG> (Thumb, 74 bytes, Stack size 0 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = Draw_Path &rArr; LCD_Clear &rArr; LCD_SetCursor &rArr; LCD_WriteReg
-</UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<P><STRONG><a name="[b3]"></a>Draw_Path</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, main.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fast_DrawPoint
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Clear
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
 
-<P><STRONG><a name="[a0]"></a>main</STRONG> (Thumb, 486 bytes, Stack size 16 bytes, main.o(.text))
+<P><STRONG><a name="[a0]"></a>main</STRONG> (Thumb, 474 bytes, Stack size 16 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
 <LI>Call Chain = main &rArr; LCD_Init &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -489,7 +485,6 @@ Global Symbols
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KEY_Scan
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KEY_Init
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_Analysis
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Draw_Path
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gps_Msg_Show
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
