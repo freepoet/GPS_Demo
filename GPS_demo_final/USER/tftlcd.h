@@ -21,7 +21,6 @@
 
 #define TFTLCD_ILI9481
 
-
 #define TFTLCD_DIR	0	//0：竖屏  1：横屏  默认竖屏
 
 //TFTLCD地址结构体
@@ -31,13 +30,10 @@ typedef struct
 	u16 LCD_DATA;
 }TFTLCD_TypeDef;
 
-
 //使用NOR/SRAM的 Bank1.sector4,地址位HADDR[27,26]=11 A6作为数据命令区分线 
 //注意设置时STM32内部会右移一位对齐! 111 1110=0X7E			    
 #define TFTLCD_BASE        ((u32)(0x6C000000 | 0x0000007E))
 #define TFTLCD             ((TFTLCD_TypeDef *) TFTLCD_BASE)
-
-
 
 //TFTLCD重要参数集
 typedef struct  
@@ -116,6 +112,8 @@ void Interface_Display(void);
 void Gps_Msg_Show1(void);
 void Gps_Msg_Show2(void);
 void Gps_Msg_Show(void);
+void Draw_Path(void);
+
 
 
 

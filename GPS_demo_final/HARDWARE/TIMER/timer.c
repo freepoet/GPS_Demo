@@ -106,9 +106,6 @@ void TIM3_Init(u16 per,u16 psc)
 *******************************************************************************/
 void TIM3_IRQHandler(void)
 {
-
-
-
 	if(TIM_GetITStatus(TIM3,TIM_IT_Update))
 	{
 	
@@ -117,6 +114,7 @@ void TIM3_IRQHandler(void)
 		{
 			flag_draw=!flag_draw;
 		}
+		/*
 		if(key==KEY0_PRES)//k_left
 		{
 		 
@@ -137,6 +135,7 @@ void TIM3_IRQHandler(void)
 		 }
 		 
  		}
+		*/
 	}
 	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);	
 
