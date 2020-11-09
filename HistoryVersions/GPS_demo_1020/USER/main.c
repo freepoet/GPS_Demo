@@ -159,6 +159,7 @@ int main(void)
 
 			if(upload)printf("\r\n%s\r\n",USART1_TX_BUF);//发送接收到的数据到串口1
  		}
+		/*
 		key=KEY_Scan(0);
 		if(key==KEY1_PRES)
 			{
@@ -169,7 +170,7 @@ int main(void)
 			
 			}
      
-		/*
+		
 		if(key==KEY0_PRES)
 		{
 			upload=!upload;

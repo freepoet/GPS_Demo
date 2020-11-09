@@ -2,6 +2,9 @@
 #include "led.h"
 #include "key.h"
 #include "tftlcd.h"
+#include "gps.h"
+#include "delay.h"  
+#include "delay.h"  
 
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
@@ -19,6 +22,8 @@
 extern vu16 USART3_RX_STA;
 extern u8 flag_draw,flag_demo;
 extern u8 key;
+extern u32 longitude1,latitude1;
+extern nmea_msg gpsx; 
 //定时器7中断服务程序		    
 void TIM7_IRQHandler(void)
 { 	
@@ -113,6 +118,11 @@ void TIM3_IRQHandler(void)
 		if(key==KEY1_PRES)
 		{
 			flag_draw=!flag_draw;
+			//LCD_Clear(WHITE);
+			LCD_Fill(0,0,310,470,WHITE);
+				delay_ms(300);
+		  longitude1=gpsx.longitude;
+	    latitude1=gpsx.latitude;
 		}
 		/*
 		if(key==KEY0_PRES)//k_left

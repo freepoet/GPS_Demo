@@ -48,3 +48,4 @@
 ..\obj\main.o: ..\HARDWARE\GPS\gps.h
 ..\obj\main.o: C:\ning\softwares\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 ..\obj\main.o: ..\HARDWARE\TIMER\timer.h
+..\obj\main.o: C:\ning\softwares\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

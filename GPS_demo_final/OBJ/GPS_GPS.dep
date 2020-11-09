@@ -1,5 +1,5 @@
 Dependencies for Project 'GPS', Target 'GPS': (DO NOT MODIFY !)
-F (.\main.c)(0x5FA69DC9)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\FWLIB\inc -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART -I..\HARDWARE\GPS-I C:\ning\softwares\Keil_v5\Projects\GPS_demo\GPS_demo_final\USER\RTE-I C:\ning\softwares\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I C:\ning\softwares\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x5FA8C493)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\FWLIB\inc -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART -I..\HARDWARE\GPS-I C:\ning\softwares\Keil_v5\Projects\GPS_demo\GPS_demo_final\USER\RTE-I C:\ning\softwares\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I C:\ning\softwares\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\SYSTEM\sys\sys.h)(0x5F9AAF5F)
 I (..\USER\stm32f4xx.h)(0x5F9AAF5F)
 I (..\CORE\core_cm4.h)(0x5F9AAF5F)
@@ -48,6 +48,7 @@ I (C:\ning\softwares\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (..\HARDWARE\GPS\gps.h)(0x5F9AAF5F)
 I (C:\ning\softwares\Keil_v5\ARM\ARMCC\include\math.h)(0x5475F2FE)
 I (..\HARDWARE\TIMER\timer.h)(0x5F9AAF5F)
+I (C:\ning\softwares\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
 F (.\stm32f4xx_it.c)(0x5F9AAF5F)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\FWLIB\inc -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART -I..\HARDWARE\GPS-I C:\ning\softwares\Keil_v5\Projects\GPS_demo\GPS_demo_final\USER\RTE-I C:\ning\softwares\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I C:\ning\softwares\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f4xx_it.o --omf_browse ..\obj\stm32f4xx_it.crf --depend ..\obj\stm32f4xx_it.d)
 I (stm32f4xx_it.h)(0x5F9AAF5F)
 I (stm32f4xx.h)(0x5F9AAF5F)
@@ -121,7 +122,7 @@ I (..\FWLIB\inc\stm32f4xx_can.h)(0x5F9AAF5F)
 I (..\FWLIB\inc\stm32f4xx_dac.h)(0x5F9AAF5F)
 I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x5F9AAF5F)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x5F9AAF5F)
-F (.\tftlcd.c)(0x5FA66555)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\FWLIB\inc -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART -I..\HARDWARE\GPS-I C:\ning\softwares\Keil_v5\Projects\GPS_demo\GPS_demo_final\USER\RTE-I C:\ning\softwares\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I C:\ning\softwares\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\obj\tftlcd.o --omf_browse ..\obj\tftlcd.crf --depend ..\obj\tftlcd.d)
+F (.\tftlcd.c)(0x5FA8C3F3)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\FWLIB\inc -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART -I..\HARDWARE\GPS-I C:\ning\softwares\Keil_v5\Projects\GPS_demo\GPS_demo_final\USER\RTE-I C:\ning\softwares\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I C:\ning\softwares\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\obj\tftlcd.o --omf_browse ..\obj\tftlcd.crf --depend ..\obj\tftlcd.d)
 I (tftlcd.h)(0x5FA6920B)
 I (..\SYSTEM\sys\sys.h)(0x5F9AAF5F)
 I (..\USER\stm32f4xx.h)(0x5F9AAF5F)
@@ -241,7 +242,7 @@ I (..\FWLIB\inc\stm32f4xx_dac.h)(0x5F9AAF5F)
 I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x5F9AAF5F)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x5F9AAF5F)
 I (..\SYSTEM\delay\delay.h)(0x5F9AAF5F)
-F (..\HARDWARE\TIMER\timer.c)(0x5FA696C3)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\FWLIB\inc -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART -I..\HARDWARE\GPS-I C:\ning\softwares\Keil_v5\Projects\GPS_demo\GPS_demo_final\USER\RTE-I C:\ning\softwares\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I C:\ning\softwares\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\obj\timer.o --omf_browse ..\obj\timer.crf --depend ..\obj\timer.d)
+F (..\HARDWARE\TIMER\timer.c)(0x5FA8C81A)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\FWLIB\inc -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART -I..\HARDWARE\GPS-I C:\ning\softwares\Keil_v5\Projects\GPS_demo\GPS_demo_final\USER\RTE-I C:\ning\softwares\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I C:\ning\softwares\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\obj\timer.o --omf_browse ..\obj\timer.crf --depend ..\obj\timer.d)
 I (..\HARDWARE\TIMER\timer.h)(0x5F9AAF5F)
 I (..\SYSTEM\sys\sys.h)(0x5F9AAF5F)
 I (..\USER\stm32f4xx.h)(0x5F9AAF5F)
@@ -281,6 +282,8 @@ I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x5F9AAF5F)
 I (..\HARDWARE\LED\led.h)(0x5F9AAF5F)
 I (..\HARDWARE\KEY\key.h)(0x5F9AAF5F)
 I (..\USER\tftlcd.h)(0x5FA6920B)
+I (..\HARDWARE\GPS\gps.h)(0x5F9AAF5F)
+I (..\SYSTEM\delay\delay.h)(0x5F9AAF5F)
 F (..\HARDWARE\USART3\usart3.c)(0x5F9AAF5F)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\HARDWARE\LCD -I..\FWLIB\inc -I..\HARDWARE\KEY -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART -I..\HARDWARE\GPS-I C:\ning\softwares\Keil_v5\Projects\GPS_demo\GPS_demo_final\USER\RTE-I C:\ning\softwares\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I C:\ning\softwares\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\obj\usart3.o --omf_browse ..\obj\usart3.crf --depend ..\obj\usart3.d)
 I (..\SYSTEM\delay\delay.h)(0x5F9AAF5F)
 I (..\SYSTEM\sys\sys.h)(0x5F9AAF5F)

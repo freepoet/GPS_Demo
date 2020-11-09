@@ -9,6 +9,7 @@
 extern nmea_msg gpsx;
 extern u8 flag_draw;
 extern u8 flag_demo;
+
 //LCD的画笔颜色和背景色	   
 u16 FRONT_COLOR=BLACK;	//画笔颜色
 u16 BACK_COLOR=WHITE;  //背景色 
@@ -1836,6 +1837,7 @@ void LCD_Clear(u16 color)
 		for (j=0; j<tftlcd_data.height; j++)
 		{
 			LCD_WriteData_Color(color);
+
 		}
 	} 
 }
@@ -2440,7 +2442,7 @@ void Interface_Display(void)
 	LCD_ShowString(40,50,300,24,24,"Model  :Neo-6M");	
 	LCD_ShowString(40,80,300,24,24,"Author:");
 	//show_font();//显示中文名字
-	LCD_ShowString(40,110,300,24,24,"K_LEFT Function Switch");   	 
+	LCD_ShowString(40,110,300,24,24,"K_DOWN Function Switch");   	 
 	LCD_ShowString(0,135,320,24,24,"-------------------------------");   	
 //	LCD_ShowString(40,140,300,24,24,"NMEA Data Upload:OFF"); 
  
@@ -2555,30 +2557,5 @@ double  compute_distance(double latitude1,double longitude1,double latitude2,  d
 }
 
 
-
-//运动轨迹绘制函数
-void Draw_Path(void)
-{
-	u32 xt,yt,delta_x,delta_y,longitude1,latitude1,longitude2,latitude2;//gpsx.longitude latitude是u32类型的 要统一
-  u16 K=100;
-	longitude1=gpsx.longitude;
-	latitude1=gpsx.latitude;
-	xt=tftlcd_data.width/2;
-	yt=tftlcd_data.height/2;
-	//GPS当前位置和LCD屏幕中心位置相统一
-  while(1)
-	{
-		LCD_DrawFRONT_COLOR(xt,yt,RED);
-		longitude2=gpsx.longitude;
-		latitude2=gpsx.latitude;
-		delta_x=(longitude2-longitude1)*K;
-		delta_y=(latitude2-latitude1)*K;
-		xt=xt+delta_x;
-		yt=yt+delta_y;
-		longitude1=longitude2;
-		latitude1=latitude2;
-		if(!flag_draw) break;       			
-	}
-}
 
 

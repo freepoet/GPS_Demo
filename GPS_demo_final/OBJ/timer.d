@@ -39,3 +39,5 @@
 ..\obj\timer.o: ..\HARDWARE\LED\led.h
 ..\obj\timer.o: ..\HARDWARE\KEY\key.h
 ..\obj\timer.o: ..\USER\tftlcd.h
+..\obj\timer.o: ..\HARDWARE\GPS\gps.h
+..\obj\timer.o: ..\SYSTEM\delay\delay.h

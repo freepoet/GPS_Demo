@@ -10,6 +10,7 @@
 #include "gps.h"	 
 #include "math.h"
 #include "timer.h"
+#include "stdlib.h"
 /****************************************Copyright (c)****************************************************
  
 **--------------File Info---------------------------------------------------------------------------------
@@ -30,10 +31,19 @@ nmea_msg gpsx; 											//GPS–≈œ¢
 u8 key=0XFF;
 u8 flag_draw=0;//ªÊ÷∆πÏº£±Í÷æŒª
 u8 flag_demo=0;//—› æ±Í÷æŒª
+
+u32 xt,yt,delta_x,delta_y,longitude1,latitude1,longitude2,latitude2;//gpsx.longitude latitude «u32¿‡–Õµƒ “™Õ≥“ª
+
 int main(void)
 { 
 	u16 i,rxlen;
 	u16 lenx;
+	struct pos
+	{
+		u32 x;
+		u32 y;
+		u32 n;
+	};
 	//u8 upload=0;
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//…Ë÷√œµÕ≥÷–∂œ”≈œ»º∂∑÷◊È2
 	delay_init(168);      	//≥ı ºªØ—” ±∫Ø ˝
@@ -48,7 +58,7 @@ int main(void)
 	Interface_Display();
 	if(Ublox_Cfg_Rate(1000,1)!=0)	//…Ë÷√∂®Œª–≈œ¢∏¸–¬ÀŸ∂»Œ™1000ms,À≥±„≈–∂œGPSƒ£øÈ «∑Ò‘⁄Œª. 
 	{
-   	//LCD_ShowString(40,140,200,24,24,"NEO-6M Setting...");
+   	LCD_ShowString(40,160,200,24,24,"NEO-6M Setting...");
 		while((Ublox_Cfg_Rate(1000,1)!=0)&&key)	//≥÷–¯≈–∂œ,÷±µΩø…“‘ºÏ≤ÈµΩNEO-6M,«“ ˝æ›±£¥Ê≥…π¶
 		{
 			usart3_init(9600);				//≥ı ºªØ¥Æø⁄3≤®Ãÿ¬ Œ™9600(EEPROM√ª”–±£¥Ê ˝æ›µƒ ±∫Ú,≤®Ãÿ¬ Œ™9600.)
@@ -57,14 +67,25 @@ int main(void)
 			Ublox_Cfg_Tp(1000000,100000,1);	//…Ë÷√PPSŒ™1√Î÷” ‰≥ˆ1¥Œ,¬ˆ≥ÂøÌ∂»Œ™100ms	    
 			key=Ublox_Cfg_Cfg_Save();		//±£¥Ê≈‰÷√  
 		}	  					 
-	   //LCD_ShowString(40,140,200,24,24,"NEO-6M Set Done!!");
+	   LCD_ShowString(40,160,200,24,24,"NEO-6M Set Done!!");
 		delay_ms(500);
-	   //LCD_Fill(30,120,30+200,120+16,WHITE);//«Â≥˝œ‘ æ 
+	   LCD_Fill(0,160,30+200,160+24,WHITE);//«Â≥˝œ‘ æ 
 	}
+
+	xt=tftlcd_data.width/2;
+	yt=tftlcd_data.height/2;
 	while(1) 
 	{	
-		static u16 t=0;
+		u16 Res=1;//∑÷±Ê¬   √◊
+			u16 K;//±»¿˝œµ ˝
+		//u16 n=0;
+		static u32 t=0;
+		/*
+		u32* x = (u32 *) malloc ( sizeof(u32) * 300 );
+		u32* y = (u32 *) malloc ( sizeof(u32) * 300 );
+		*/
     //timer.c ¿ÔµƒTIM3_IRQHandler()◊˜Œ™∂® ±∆˜÷–∂œ∑˛ŒÒ◊”∫Ø ˝
+		K=5*1.0/Res;
 		delay_ms(1);
 		if(USART3_RX_STA&0X8000)		//Ω” ’µΩ“ª¥Œ ˝æ›¡À
 		{
@@ -73,22 +94,36 @@ int main(void)
  			USART3_RX_STA=0;		   	//∆Ù∂Øœ¬“ª¥ŒΩ” ’
 			USART1_TX_BUF[i]=0;			//◊‘∂ØÃÌº”Ω· ¯∑˚
 			GPS_Analysis(&gpsx,(u8*)USART1_TX_BUF);//∑÷Œˆ◊÷∑˚¥Æ
-			/*
 			if(flag_draw)
 			{
-				if(!t) LCD_Clear(WHITE);//≈–∂œ «∑Ò ◊¥ŒΩ¯»Îif£¨ ◊¥Œ‘Ú«Â∆¡£¨∑Ò‘Ú≤ª«Â
-				Draw_Path();    //ªÊ÷∆πÏº£
-				t++;
-				if(t>1000) t=1000;//∑¿÷πt‘ΩΩÁ
+				/*
+				if((n%10)==0)
+				{
+           x=gpsx.longitude;
+					 y=gpsx.latitude;
+				}//º‰∏Ù1sº«¬ºµ±«∞Œª÷√◊¯±Í
+				n++;	
+				*/
+				//ªÊ÷∆πÏº£
+			 // LCD_DrawFRONT_COLOR(xt,yt,RED);
+				LCD_Draw_Circle(xt,yt,1);
+		    longitude2=gpsx.longitude;
+		    latitude2=gpsx.latitude;
+				delta_x=-1*(longitude2-longitude1)*K;
+				delta_y=(latitude2-latitude1)*K;
+				xt=xt+delta_x;
+				yt=yt+delta_y;
+				longitude1=longitude2;
+				latitude1=latitude2; 
+        //draw_message_show()			
 			}
 			else
 			{
-				LCD_Clear(WHITE);
 				//show_chinese(30,140,˝",RED,WHITE);  //YELLOW
 				Gps_Msg_Show();				//œ‘ æ–≈œ¢
 			}
-			*/
-			if(!flag_demo) Gps_Msg_Show();				//œ‘ æ–≈œ¢
+			
+			//if(!flag_demo) Gps_Msg_Show();				//œ‘ æ–≈œ¢
 			//if(upload)printf("\r\n%s\r\n",USART1_TX_BUF);//∑¢ÀÕΩ” ’µΩµƒ ˝æ›µΩ¥Æø⁄1
  		}
 		//Ω” ‹ ˝æ›≥…π¶‘ÚD1…¡À∏
