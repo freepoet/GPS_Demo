@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OBJ\GPS.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\GPS.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Mon Nov 09 12:39:56 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Mon Nov 09 14:45:14 2020
 <BR><P>
 <H3>Maximum Stack Usage =        372 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -578,7 +578,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Set_Window
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_WriteData_Color
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TFTLCD_Init
+<BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TFTLCD_Init
 </UL>
 
 <P><STRONG><a name="[ac]"></a>TFTLCD_Init</STRONG> (Thumb, 726 bytes, Stack size 8 bytes, tftlcd.o(.text))
@@ -603,8 +604,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Set_Window
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_WriteData_Color
 </UL>
-<BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[c9]"></a>LCD_DrawPoint</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, tftlcd.o(.text))
@@ -713,27 +713,20 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawFRONT_COLOR
 </UL>
 
-<P><STRONG><a name="[d8]"></a>LCD_Show_CH_Font24</STRONG> (Thumb, 188 bytes, Stack size 36 bytes, tftlcd.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = LCD_Show_CH_Font24 &rArr; LCD_DrawFRONT_COLOR &rArr; LCD_Set_Window
-</UL>
-<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawFRONT_COLOR
+<P><STRONG><a name="[d8]"></a>LCD_Show_CH_Font24</STRONG> (Thumb, 188 bytes, Stack size 36 bytes, tftlcd.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawFRONT_COLOR
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_font
 </UL>
 
-<P><STRONG><a name="[d9]"></a>show_font</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, tftlcd.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = show_font &rArr; LCD_Show_CH_Font24 &rArr; LCD_DrawFRONT_COLOR &rArr; LCD_Set_Window
-</UL>
-<BR>[Calls]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Show_CH_Font24
-</UL>
-<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Interface_Display
+<P><STRONG><a name="[d9]"></a>show_font</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, tftlcd.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Show_CH_Font24
 </UL>
 
-<P><STRONG><a name="[ae]"></a>Interface_Display</STRONG> (Thumb, 126 bytes, Stack size 12 bytes, tftlcd.o(.text))
+<P><STRONG><a name="[ae]"></a>Interface_Display</STRONG> (Thumb, 122 bytes, Stack size 12 bytes, tftlcd.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = Interface_Display &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawFRONT_COLOR &rArr; LCD_Set_Window
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_font
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
 </UL>
 <BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gps_Msg_Show2
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gps_Msg_Show1
@@ -741,16 +734,26 @@ Global Symbols
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[da]"></a>Gps_Msg_Show1</STRONG> (Thumb, 284 bytes, Stack size 16 bytes, tftlcd.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
+<P><STRONG><a name="[da]"></a>Gps_Msg_Show1</STRONG> (Thumb, 284 bytes, Stack size 16 bytes, tftlcd.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
+<LI>Call Chain = Gps_Msg_Show1 &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Interface_Display
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
+<BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
+</UL>
 
-<P><STRONG><a name="[dc]"></a>Gps_Msg_Show2</STRONG> (Thumb, 282 bytes, Stack size 16 bytes, tftlcd.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
+<P><STRONG><a name="[dc]"></a>Gps_Msg_Show2</STRONG> (Thumb, 282 bytes, Stack size 16 bytes, tftlcd.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
+<LI>Call Chain = Gps_Msg_Show2 &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Interface_Display
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
 </UL>
 
 <P><STRONG><a name="[b7]"></a>Gps_Msg_Show</STRONG> (Thumb, 1054 bytes, Stack size 32 bytes, tftlcd.o(.text))
@@ -845,14 +848,17 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[35]"></a>TIM3_IRQHandler</STRONG> (Thumb, 104 bytes, Stack size 8 bytes, timer.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = TIM3_IRQHandler &rArr; LCD_Fill &rArr; LCD_Set_Window
+<P><STRONG><a name="[35]"></a>TIM3_IRQHandler</STRONG> (Thumb, 154 bytes, Stack size 8 bytes, timer.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
+<LI>Call Chain = TIM3_IRQHandler &rArr; Gps_Msg_Show2 &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KEY_Scan
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gps_Msg_Show2
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gps_Msg_Show1
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Clear
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
@@ -2345,9 +2351,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
+<BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__c89vsprintf
+<LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 </UL>
 
 <P><STRONG><a name="[6c]"></a>_sputc</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, _sputc.o(.text))
