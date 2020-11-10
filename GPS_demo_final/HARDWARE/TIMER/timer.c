@@ -117,14 +117,14 @@ void TIM3_IRQHandler(void)
 		key=KEY_Scan(0);
 		if(key==KEY1_PRES)
 		{
-			flag_demo=!flag_demo;
-			LCD_Clear(WHITE);
-			//LCD_Fill(0,0,310,470,WHITE);  lcd_fill white出现清理不干净
+			flag_draw=!flag_draw;
+			//LCD_Clear(WHITE);
+			LCD_Fill(0,0,310,470,WHITE);
 				delay_ms(300);
 		  longitude1=gpsx.longitude;
 	    latitude1=gpsx.latitude;
 		}
-		
+		/*
 		if(key==KEY0_PRES)//k_left
 		{
 		 
@@ -145,7 +145,7 @@ void TIM3_IRQHandler(void)
 		 }
 		 
  		}
-		
+		*/
 	}
 	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);	
 

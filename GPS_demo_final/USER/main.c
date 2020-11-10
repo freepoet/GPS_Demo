@@ -15,7 +15,7 @@
  
 **--------------File Info---------------------------------------------------------------------------------
 ** File name:          main.c
-** Last modified Date: 2020/11/09
+** Last modified Date: 2020/11/11
 ** Created date:       2020/10/19    
 ** Version:            V1.0
 ** Descriptions:       Null
@@ -127,14 +127,18 @@ int main(void)
 			//if(upload)printf("\r\n%s\r\n",USART1_TX_BUF);//发送接收到的数据到串口1
  		}
 		//接受数据成功则D1闪烁
-
 		if((lenx%100)==0)LED0=!LED0; 	    				 
 		lenx++;	
 	}
 }
 	
 /*
-	
+		if(key==KEY0_PRES)
+		{
+			upload=!upload;
+			FRONT_COLOR=RED;
+			if(upload)LCD_ShowString(30,100,200,16,16,"NMEA Data Upload:ON ");
+			else LCD_ShowString(30,100,200,16,16,"NMEA Data Upload:OFF");
  		}
 	*/	
 								    
