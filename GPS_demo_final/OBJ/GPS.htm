@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OBJ\GPS.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\GPS.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Tue Nov 10 08:25:34 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Wed Nov 11 19:07:48 2020
 <BR><P>
 <H3>Maximum Stack Usage =        372 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -713,20 +713,27 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawFRONT_COLOR
 </UL>
 
-<P><STRONG><a name="[d8]"></a>LCD_Show_CH_Font24</STRONG> (Thumb, 188 bytes, Stack size 36 bytes, tftlcd.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawFRONT_COLOR
+<P><STRONG><a name="[d8]"></a>LCD_Show_CH_Font24</STRONG> (Thumb, 188 bytes, Stack size 36 bytes, tftlcd.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = LCD_Show_CH_Font24 &rArr; LCD_DrawFRONT_COLOR &rArr; LCD_Set_Window
+</UL>
+<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawFRONT_COLOR
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_font
 </UL>
 
-<P><STRONG><a name="[d9]"></a>show_font</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, tftlcd.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Show_CH_Font24
+<P><STRONG><a name="[d9]"></a>show_font</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, tftlcd.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = show_font &rArr; LCD_Show_CH_Font24 &rArr; LCD_DrawFRONT_COLOR &rArr; LCD_Set_Window
+</UL>
+<BR>[Calls]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Show_CH_Font24
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Interface_Display
 </UL>
 
-<P><STRONG><a name="[ae]"></a>Interface_Display</STRONG> (Thumb, 122 bytes, Stack size 12 bytes, tftlcd.o(.text))
+<P><STRONG><a name="[ae]"></a>Interface_Display</STRONG> (Thumb, 126 bytes, Stack size 12 bytes, tftlcd.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = Interface_Display &rArr; LCD_ShowString &rArr; LCD_ShowChar &rArr; LCD_DrawFRONT_COLOR &rArr; LCD_Set_Window
 </UL>
-<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
+<BR>[Calls]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_font
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ShowString
 </UL>
 <BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gps_Msg_Show2
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gps_Msg_Show1

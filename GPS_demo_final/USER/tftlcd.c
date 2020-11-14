@@ -2441,7 +2441,7 @@ void Interface_Display(void)
 	LCD_ShowString(40,20,300,24,24,"STM32 GPS-Module Test");	
 	LCD_ShowString(40,50,300,24,24,"Model  :Neo-6M");	
 	LCD_ShowString(40,80,300,24,24,"Author:");
-	//show_font();//显示中文名字
+	show_font();//显示中文名字
 	LCD_ShowString(40,110,300,24,24,"K_DOWN Function Switch");   	 
 	LCD_ShowString(0,135,320,24,24,"-------------------------------");   	
 //	LCD_ShowString(40,140,300,24,24,"NMEA Data Upload:OFF"); 

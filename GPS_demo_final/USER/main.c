@@ -76,7 +76,7 @@ int main(void)
 	yt=tftlcd_data.height/2;
 	while(1) 
 	{	
-		u16 Res=1;//分辨率  米
+		u16 Res=2;//分辨率  米
 			u16 K;//比例系数
 		//u16 n=0;
 		static u32 t=0;
