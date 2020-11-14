@@ -35,9 +35,9 @@ debug:设置断点发现程序总是卡在定位初始化的位置。 </br>
 ##### 功能1：显示时间、经纬度、海拔等信息；
 在空旷位置，首次定位时间较长，可能需要几分钟的时间。<br>
 fix mode:3D 代表定位成功。 定位成功以后才能切换到功能2。
-
-![image](https://github.com/freepoet/GPS_demo/blob/main/demo_images/test.jpg)
 ##### 功能2：轨迹绘制（*有待完善*）；
+### 三 程序流程图：
+![image](https://github.com/freepoet/GPS_demo/blob/main/demo_images/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20201114094329.png)
 
 
 
