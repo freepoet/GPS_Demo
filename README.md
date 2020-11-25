@@ -22,7 +22,7 @@ GPS_Demo_1031演示程序.
 页面左上角六边形图标，全部产品->基础服务->多协议接入->http
 ### Step3
 添加产品->创建产品,产品名称/行业/类别/简介随便写,但技术参数如下配置：</br>
-<img src="https://github.com/freepoet/GPS_demo/blob/main/Images/OneNet/%E6%8A%80%E6%9C%AF%E5%8F%82%E6%95%B0.png" height=10 width=10 alt="技术参数"/>
+ ![技术参数](https://github.com/freepoet/GPS_demo/blob/main/Images/OneNet/%E6%8A%80%E6%9C%AF%E5%8F%82%E6%95%B0.png#pic_center)</br>
 ### Step4
 点击确定后，在弹出的窗口点击立即添加设备，在新的页面点击右上角添加设备。详情如下：</br>
  ![添加设备](https://github.com/freepoet/GPS_demo/blob/main/Images/OneNet/%E6%B7%BB%E5%8A%A0%E8%AE%BE%E5%A4%87.png#pic_center)</br>
