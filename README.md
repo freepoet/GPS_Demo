@@ -1,5 +1,5 @@
 # 最近的修改
-**网页显示不了图片请参考[解决GitHub图片不显示问题](https://www.jianshu.com/p/1db303f6ee18)**
+**若网页显示不了图片，请参考[解决GitHub图片不显示问题](https://www.jianshu.com/p/1db303f6ee18)，或者直接在下载的文件夹中Images/OneNet目录下查看**
 * 2020/11/25 </br>
 GPS_Demo
 使用GSM/GPRS/GNSS(M20)模块.
