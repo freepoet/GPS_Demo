@@ -35,34 +35,21 @@
 unsigned long  Time_Cont = 0;       //定时器计数器
 ////
 	char send_buf[400] = {0};
-	char text[100] = {0};
+	char text[200] = {0};
 	char tmp[25] = {0};
+
 	char lon_str_end[15] = {0};
 	char lat_str_end[15] = {0};
-	
 
-	char lon_int_str[10]= {0};
-	char lon_dec_str[10]= {0};
-	
-	long lon_int = 0;
-	long lon_dec = 0;
-	long lon_int_mm = 0;
-	long lon_int_dd = 0;
-
-	char lat_int_str[10]= {0};
-	char lat_dec_str[10]= {0};
-	long lat_int = 0;
-	long lat_dec = 0;
-	long lat_int_mm = 0;
-	long lat_int_dd = 0;
+	char sendCom[2] = {0x1A};
 /////
 
 
 char OneNetServer[] = "183.230.40.33";       //不需要修改
 
 
-char device_id[] = "651451568";    //修改为自己的设备ID
-char API_KEY[] = "iywrUgMS2HcAoYTXouILUrbGJKI=";    //修改为自己的API_KEY
+char device_id[] = "653603535";    //修改为自己的设备ID
+char API_KEY[] = "ngjUkVFXgPv09b0vd0uzkvwEpsw=";    //修改为自己的API_KEY
 char sensor_gps[] = "location";				//不需要修改
 
 unsigned int count = 0;
@@ -75,6 +62,9 @@ void Sys_Soft_Reset(void);
 void parseGpsBuffer(void);
 void printGpsBuffer(void);
 void postGpsDataToOneNet(char* API_VALUE_temp, char* device_id_temp, char* sensor_id_temp, char* lon_temp, char* lat_temp);
+char* longitudeToOnenetFormat(char *lon_str_temp);
+char* latitudeToOnenetFormat(char *lat_str_temp);
+int Digcount(long num);
 
 int main(void)
 {	
@@ -127,8 +117,8 @@ int main(void)
 		parseGpsBuffer();
 		printGpsBuffer();
 		
-	//	delay_ms(10);
-	//	Gps_Msg_Show();
+	  delay_ms(100);
+		Gps_Msg_Show();
 	}
 	
 }
@@ -233,56 +223,145 @@ void printGpsBuffer()
 		
 	}
 }
+int Digcount(long num)
+{
+	int i=0;	
+	while(num>0)
+	{ 
+		i++;
+		num=num/10;
+	}
+  return i;
+}
+
+char* longitudeToOnenetFormat(char *lon_str_temp) 		//经度
+{
+	unsigned long lon_Onenet = 0;
+	unsigned int dd_int = 0;
+	unsigned long mm_int = 0;
+	float lon_Onenet_double = 0;
+	int i = 0;
+
+	unsigned long tempInt = 0;
+	unsigned long tempPoint = 0;
+	static char result[20];
+	char point_result[20];
+	int pointLength = 0;
+
+	//51单片机没有double，double和float，精度不够，这里只能分开整数和小数换算。
+	sscanf(lon_str_temp, "%ld.%ld", &tempInt,&tempPoint);
+	lon_Onenet = tempInt%100;
+	pointLength = strlen(lon_str_temp) - 1 - Digcount(tempInt);		
+	for( i = 0 ; i < pointLength ; i++)	//小数点几位，整数部分就放大10的几次方
+	{
+		lon_Onenet *= 10; 	
+	}
+
+	dd_int = tempInt / 100; //取出dd
+
+	mm_int = lon_Onenet + tempPoint; //取出MM部分
+
+	mm_int = mm_int*10/6;	 		//本来是除以60，这里*10/6为了多2位小数点有有效数字
+
+
+   	sprintf(result,"%d.",dd_int);
+	for( i = 0 ; i < pointLength + 2 - Digcount(mm_int) ; i++)
+	{
+		strcat(result, "0");	
+	}
+	sprintf(point_result,"%ld",mm_int);
+	strcat(result, point_result);
+
+//	SendString("\r\n==========ONENET FORMART==========\r\n");
+//	SendString(result);
+	return result;
+}
+
+
+
+char* latitudeToOnenetFormat(char *lat_str_temp) 		//纬度
+{
+	unsigned long lat_Onenet = 0;
+	int dd_int = 0;
+	unsigned long mm_int = 0;
+
+	int i = 0;
+
+	unsigned long tempInt = 0;
+	unsigned long tempPoint = 0;
+	static char result[20];
+	char  point_result[20];
+	int pointLength = 0;
+//	char xdata debugTest[30];
+	
+	//51单片机没有double，double和float，精度不够，这里只能分开整数和小数换算。
+	sscanf(lat_str_temp, "%ld.%ld", &tempInt,&tempPoint);
+	lat_Onenet = tempInt%100;
+	
+//	SendString("\r\n==========ONENET FORMART strlen(lat_str_temp)==========\r\n");
+//	sprintf(debugTest,"%d",strlen(lat_str_temp));
+//	SendString(debugTest);
+
+	pointLength = strlen(lat_str_temp) - 1 - Digcount(tempInt);	
+
+//	SendString("\r\n==========ONENET FORMART pointLength==========\r\n");
+//	sprintf(debugTest,"%d",pointLength);
+//	SendString(debugTest);
+	for( i = 0 ; i < pointLength ; i++)	//小数点几位，整数部分就放大10的几次方
+	{
+		lat_Onenet *= 10; 	
+	}
+
+//	SendString("\r\n==========ONENET FORMART tempPoint==========\r\n");
+//	sprintf(debugTest,"%ld",tempPoint);
+//	SendString(debugTest);
+//
+//	SendString("\r\n==========ONENET FORMART tempInt==========\r\n");
+//	sprintf(debugTest,"%ld",tempInt);
+//	SendString(debugTest);
+//
+//	SendString("\r\n==========ONENET FORMART lat_Onenet==========\r\n");
+//	sprintf(debugTest,"%ld",lat_Onenet);
+//	SendString(debugTest);
+
+	dd_int = tempInt / 100; //取出dd
+
+	mm_int = lat_Onenet + tempPoint; //取出MM部分
+
+	mm_int = mm_int*10/6;	 		//本来是除以60，这里*10/6为了多2位小数点有有效数字
+
+//	SendString("\r\n==========ONENET FORMART mm_int==========\r\n");
+//	sprintf(debugTest,"%ld",mm_int);
+//	SendString(debugTest);
+
+	
+	sprintf(result,"%d.",dd_int);
+	for( i = 0 ; i < pointLength + 2 - Digcount(mm_int) ; i++)
+	{
+		strcat(result, "0");	
+	}
+	sprintf(point_result,"%ld",mm_int);
+	strcat(result, point_result);
+
+//	SendString("\r\n==========ONENET FORMART==========\r\n");
+//	SendString(result);
+	return result;
+}
 
 
 
 void postGpsDataToOneNet(char* API_VALUE_temp, char* device_id_temp, char* sensor_id_temp, char* lon_temp, char* lat_temp)
 {
 
-	
-	int i = 0;
-	char sendCom[2] = {0x1A,0x00};
 
-	//换算经度
-	sscanf(lon_temp,"%ld.%ld",&lon_int,&lon_dec);
-	
-	sprintf(lon_dec_str,"%ld",lon_dec);		//获取小数字符串
-	sprintf(lon_int_str,"%ld",lon_int);		//获取整数字符串
-	
-	printf("\r\nlon_int_str:%s,lon_dec_str:%s",lon_int_str,lon_dec_str);
-	//获取分的整数，然后放大 小数个数 的倍数
-	lon_int_mm = lon_int%100;
-	for(i = 0 ; i <strlen(lon_dec_str) ; i++)
-	{
-		lon_int_mm *= 10;
-	}
-	//整合分
-	lon_int_mm += lon_dec;
-	//获取度
-	lon_int_dd = lon_int/100;
-	//转换分为度,小数末尾做四舍五入
-	lon_int_mm = (float)lon_int_mm/60 + 0.5;
-	sprintf(lon_str_end,"%ld.%ld",lon_int_dd,lon_int_mm);
+//	dtostrf(longitudeToOnenetFormat(lon_temp), 3, 6, lon_str_end); //转换成字符串输出
+//	dtostrf(latitudeToOnenetFormat(lat_temp), 2, 6, lat_str_end); //转换成字符串输出
 
-	//换算纬度
-	sscanf(lat_temp,"%ld.%ld",&lat_int,&lat_dec);
-	sprintf(lat_int_str,"%ld",lat_int);
-	sprintf(lat_dec_str,"%ld",lat_dec);
-	
-	printf("\r\nlat_int_str:%s,lat_dec_str:%s",lat_int_str,lat_dec_str);
-	//获取分的整数，然后放大 小数个数 的倍数
-	lat_int_mm = lat_int%100;
-	for(i = 0 ; i <strlen(lat_dec_str) ; i++)
-	{
-		lat_int_mm *= 10;
-	}
-	//整合分
-	lat_int_mm += lat_dec;
-	//获取度
-	lat_int_dd = lat_int/100;
-	//转换分为度,小数末尾做四舍五入
-	lat_int_mm = (float)lat_int_mm/60 + 0.5;
-	sprintf(lat_str_end,"%ld.%ld",lat_int_dd,lat_int_mm);
+//	lon_temp = "11224.4992";
+//	lat_temp = "3438.1633";
+
+	sprintf(lon_str_end,"%s", longitudeToOnenetFormat(lon_temp)); 
+	sprintf(lat_str_end,"%s", latitudeToOnenetFormat(lat_temp)); 
 
 	//连接服务器
 	memset(send_buf, 0, 400);    //清空
@@ -398,17 +477,17 @@ unsigned int sendCommand(char *Command, char *Response, unsigned long Timeout, u
 		u3_printf(Command); 		//发送GPRS指令
 		
 		printf("\r\n***************send****************\r\n");
-		printf((char *)Command);
+		printf(Command);
 		
 		Time_Cont = 0;
 		while (Time_Cont < Timeout)
 		{
 			delay_ms(100);
 			Time_Cont += 100;
-			if (strstr((char *)USART3_RX_BUF, Response) != NULL)
+			if (strstr(USART3_RX_BUF, Response) != NULL)
 			{				
 				printf("\r\n***************receive****************\r\n");
-				printf((char *)USART3_RX_BUF);
+				printf(USART3_RX_BUF);
 				return Success;
 			}
 			
@@ -416,7 +495,7 @@ unsigned int sendCommand(char *Command, char *Response, unsigned long Timeout, u
 		Time_Cont = 0;
 	}
 	printf("\r\n***************receive****************\r\n");
-	printf((char *)USART3_RX_BUF);
+	printf(USART3_RX_BUF);
 	USART3_CLR_Buf();
 	return Failure;
 }

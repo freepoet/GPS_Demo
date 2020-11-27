@@ -21,24 +21,28 @@ Target DLL:      CMSIS_AGDI.dll V1.21.0.0
 Dialog DLL:      TCM.DLL V1.14.4.0
  
 <h2>Project:</h2>
-C:\ning\softwares\Keil_v5\Projects\GPS\GPS_Demo\GPS_Demo\USER\GPS.uvprojx
+C:\ning\softwares\Keil_v5\Projects\GPS\GPS_Demo\GPS_Demo_V4.9\USER\GPS.uvprojx
 Project File Date:  11/25/2020
 
 <h2>Output:</h2>
 Build target 'GPS'
 compiling main.c...
-main.c(264): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-        lon_int_mm = (float)lon_int_mm/60 + 0.5;
-main.c(284): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-        lat_int_mm = (float)lat_int_mm/60 + 0.5;
-main.c: 2 warnings, 0 errors
+main.c(242): warning:  #177-D: variable "lon_Onenet_double" was declared but never referenced
+        float lon_Onenet_double = 0;
+main.c(487): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+                        if (strstr(USART3_RX_BUF, Response) != NULL)
+main.c(490): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *restrict"
+                                printf(USART3_RX_BUF);
+main.c(498): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *restrict"
+        printf(USART3_RX_BUF);
+main.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=39164 RO-data=10128 RW-data=516 ZI-data=3860  
+Program Size: Code=38858 RO-data=10122 RW-data=484 ZI-data=3964  
 FromELF: creating hex file...
-"..\OBJ\GPS.axf" - 0 Error(s), 2 Warning(s).
+"..\OBJ\GPS.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
-  C:\ning\softwares\Keil_v5\Projects\GPS\GPS_Demo\GPS_Demo\USER\RTE
+  C:\ning\softwares\Keil_v5\Projects\GPS\GPS_Demo\GPS_Demo_V4.9\USER\RTE
   C:\ning\softwares\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include
 
 <h2>Collection of Component Files used:</h2>
