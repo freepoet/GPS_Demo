@@ -5,7 +5,7 @@ GPS_Demo
 使用GSM/GPRS/GNSS(M20)模块.
 其中GNSS中包括北斗、GPS和准天顶系统三者联合定位，相比于原NEO-6M模块解决了定位时间长的问题.</br>
 GNSS通过有源天线获取位置信息，传输给STM32，插有SIM卡的STM32将位置信息通过HTTP协议发送到[中国移动OneNet物联网开发平台](https://open.iot.10086.cn/).
-OneNet通过F1的device_id和APIKey获取API，将位置信息其以数据流的方式显示在网页，支持历史回放显示运动轨迹.
+OneNet通过STM32的device_id和APIKey获取API，将位置信息其以数据流的方式显示在网页，支持历史回放显示运动轨迹.
 * 2020/11/09 </br>
 GPS_Demo_1109.
 简单在TFTLCD上显示运动轨迹.
@@ -14,7 +14,7 @@ GPS_Demo_1031演示程序.
 静态显示.
 * 2020/10/20 </br>
 实现定位.
-# GPS_Demo使用说明
+# GPS_Demo使用说明(新模块）
 ## 一 OneNet配置
 ###  Step1
 注册并登录[中国移动OneNet物联网开发平台](https://open.iot.10086.cn/)账号，点击右上角“控制台”，登录开发者中心.
