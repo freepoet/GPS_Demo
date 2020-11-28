@@ -21,18 +21,18 @@
 ** Descriptions:       Null
 **--------------------------------------------------------------------------------------------------------*/
 /*				  	 
-u8 USART1_TX_BUF[USART3_MAX_RECV_LEN]; 					//´®¿Ú1,·¢ËÍ»º´æÇø
-nmea_msg gpsx; 											//GPSĞÅÏ¢
-__align(4) u8 dtbuf[50];   								//´òÓ¡»º´æÆ÷
-const u8*fixmode_tbl[4]={"Fail","Fail"," 2D "," 3D "};	//fix mode×Ö·û´® 
+u8 USART1_TX_BUF[USART3_MAX_RECV_LEN]; 					//ä¸²å£1,å‘é€ç¼“å­˜åŒº
+nmea_msg gpsx; 											//GPSä¿¡æ¯
+__align(4) u8 dtbuf[50];   								//æ‰“å°ç¼“å­˜å™¨
+const u8*fixmode_tbl[4]={"Fail","Fail"," 2D "," 3D "};	//fix modeå­—ç¬¦ä¸² 
 */
-u8 USART1_TX_BUF[USART3_MAX_RECV_LEN]; 					//´®¿Ú1,·¢ËÍ»º´æÇø
-nmea_msg gpsx; 											//GPSĞÅÏ¢
+u8 USART1_TX_BUF[USART3_MAX_RECV_LEN]; 					//ä¸²å£1,å‘é€ç¼“å­˜åŒº
+nmea_msg gpsx; 											//GPSä¿¡æ¯
 u8 key=0XFF;
-u8 flag_draw=0;//»æÖÆ¹ì¼£±êÖ¾Î»
-u8 flag_demo=0;//ÑİÊ¾±êÖ¾Î»
+u8 flag_draw=0;//ç»˜åˆ¶è½¨è¿¹æ ‡å¿—ä½
+u8 flag_demo=0;//æ¼”ç¤ºæ ‡å¿—ä½
 
-u32 xt,yt,delta_x,delta_y,longitude1,latitude1,longitude2,latitude2;//gpsx.longitude latitudeÊÇu32ÀàĞÍµÄ ÒªÍ³Ò»
+u32 xt,yt,delta_x,delta_y,longitude1,latitude1,longitude2,latitude2;//gpsx.longitude latitudeæ˜¯u32ç±»å‹çš„ è¦ç»Ÿä¸€
 
 int main(void)
 { 
@@ -45,55 +45,55 @@ int main(void)
 		u32 n;
 	};
 	//u8 upload=0;
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//ÉèÖÃÏµÍ³ÖĞ¶ÏÓÅÏÈ¼¶·Ö×é2
-	delay_init(168);      	//³õÊ¼»¯ÑÓÊ±º¯Êı
-	uart_init(115200);			//³õÊ¼»¯´®¿Ú²¨ÌØÂÊÎª115200 
-	usart3_init(38400);			//³õÊ¼»¯´®¿Ú3²¨ÌØÂÊÎª38400
-	usmart_dev.init(84); 		//³õÊ¼»¯USMART		
-	LED_Init();					//³õÊ¼»¯LED
-	KEY_Init();					//³õÊ¼»¯°´¼ü
- 	TFTLCD_Init();			 			//³õÊ¼»¯LCD
-	usmart_dev.init(72); 		//³õÊ¼»¯USMART 	 
-	TIM3_Init(100-1,8400-1);  //¶¨Ê±100ms	   Í¨ÓÃ¶¨Ê±Æ÷ÖĞ¶ÏTIMER3
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//è®¾ç½®ç³»ç»Ÿä¸­æ–­ä¼˜å…ˆçº§åˆ†ç»„2
+	delay_init(168);      	//åˆå§‹åŒ–å»¶æ—¶å‡½æ•°
+	uart_init(9600);			//åˆå§‹åŒ–ä¸²å£æ³¢ç‰¹ç‡ä¸º9600 
+	usart3_init(9600);			//åˆå§‹åŒ–ä¸²å£3æ³¢ç‰¹ç‡ä¸º9600
+	usmart_dev.init(84); 		//åˆå§‹åŒ–USMART		
+	LED_Init();					//åˆå§‹åŒ–LED
+	KEY_Init();					//åˆå§‹åŒ–æŒ‰é”®
+ 	TFTLCD_Init();			 			//åˆå§‹åŒ–LCD
+	usmart_dev.init(72); 		//åˆå§‹åŒ–USMART 	 
+	TIM3_Init(100-1,8400-1);  //å®šæ—¶100ms	   é€šç”¨å®šæ—¶å™¨ä¸­æ–­TIMER3
 	Interface_Display();
-	if(Ublox_Cfg_Rate(1000,1)!=0)	//ÉèÖÃ¶¨Î»ĞÅÏ¢¸üĞÂËÙ¶ÈÎª1000ms,Ë³±ãÅĞ¶ÏGPSÄ£¿éÊÇ·ñÔÚÎ». 
+	if(Ublox_Cfg_Rate(1000,1)!=0)	//è®¾ç½®å®šä½ä¿¡æ¯æ›´æ–°é€Ÿåº¦ä¸º1000ms,é¡ºä¾¿åˆ¤æ–­GPSæ¨¡å—æ˜¯å¦åœ¨ä½. 
 	{
    	LCD_ShowString(40,160,200,24,24,"NEO-6M Setting...");
-		while((Ublox_Cfg_Rate(1000,1)!=0)&&key)	//³ÖĞøÅĞ¶Ï,Ö±µ½¿ÉÒÔ¼ì²éµ½NEO-6M,ÇÒÊı¾İ±£´æ³É¹¦
+		while((Ublox_Cfg_Rate(1000,1)!=0)&&key)	//æŒç»­åˆ¤æ–­,ç›´åˆ°å¯ä»¥æ£€æŸ¥åˆ°NEO-6M,ä¸”æ•°æ®ä¿å­˜æˆåŠŸ
 		{
-			usart3_init(9600);				//³õÊ¼»¯´®¿Ú3²¨ÌØÂÊÎª9600(EEPROMÃ»ÓĞ±£´æÊı¾İµÄÊ±ºò,²¨ÌØÂÊÎª9600.)
-	  	Ublox_Cfg_Prt(38400);			//ÖØĞÂÉèÖÃÄ£¿éµÄ²¨ÌØÂÊÎª38400
-			usart3_init(38400);				//³õÊ¼»¯´®¿Ú3²¨ÌØÂÊÎª38400
-			Ublox_Cfg_Tp(1000000,100000,1);	//ÉèÖÃPPSÎª1ÃëÖÓÊä³ö1´Î,Âö³å¿í¶ÈÎª100ms	    
-			key=Ublox_Cfg_Cfg_Save();		//±£´æÅäÖÃ  
+			usart3_init(9600);				//åˆå§‹åŒ–ä¸²å£3æ³¢ç‰¹ç‡ä¸º9600(EEPROMæ²¡æœ‰ä¿å­˜æ•°æ®çš„æ—¶å€™,æ³¢ç‰¹ç‡ä¸º9600.)
+	  	Ublox_Cfg_Prt(9600);			//é‡æ–°è®¾ç½®æ¨¡å—çš„æ³¢ç‰¹ç‡ä¸º9600
+			usart3_init(9600);				//åˆå§‹åŒ–ä¸²å£3æ³¢ç‰¹ç‡ä¸º9600
+			Ublox_Cfg_Tp(1000000,100000,1);	//è®¾ç½®PPSä¸º1ç§’é’Ÿè¾“å‡º1æ¬¡,è„‰å†²å®½åº¦ä¸º100ms	    
+			key=Ublox_Cfg_Cfg_Save();		//ä¿å­˜é…ç½®  
 		}	  					 
 	   LCD_ShowString(40,160,200,24,24,"NEO-6M Set Done!!");
 		delay_ms(500);
-	   LCD_Fill(0,160,30+200,160+24,WHITE);//Çå³ıÏÔÊ¾ 
+	   LCD_Fill(0,160,30+200,160+24,WHITE);//æ¸…é™¤æ˜¾ç¤º 
 	}
 
 	xt=tftlcd_data.width/2;
 	yt=tftlcd_data.height/2;
 	while(1) 
 	{	
-		u16 Res=2;//·Ö±æÂÊ  Ã×
-			u16 K;//±ÈÀıÏµÊı
+		u16 Res=2;//åˆ†è¾¨ç‡  ç±³
+			u16 K;//æ¯”ä¾‹ç³»æ•°
 		//u16 n=0;
 		static u32 t=0;
 		/*
 		u32* x = (u32 *) malloc ( sizeof(u32) * 300 );
 		u32* y = (u32 *) malloc ( sizeof(u32) * 300 );
 		*/
-    //timer.c ÀïµÄTIM3_IRQHandler()×÷Îª¶¨Ê±Æ÷ÖĞ¶Ï·şÎñ×Óº¯Êı
+    //timer.c é‡Œçš„TIM3_IRQHandler()ä½œä¸ºå®šæ—¶å™¨ä¸­æ–­æœåŠ¡å­å‡½æ•°
 		K=5*1.0/Res;
 		delay_ms(1);
-		if(USART3_RX_STA&0X8000)		//½ÓÊÕµ½Ò»´ÎÊı¾İÁË
+		if(USART3_RX_STA&0X8000)		//æ¥æ”¶åˆ°ä¸€æ¬¡æ•°æ®äº†
 		{
-			rxlen=USART3_RX_STA&0X7FFF;	//µÃµ½Êı¾İ³¤¶È
+			rxlen=USART3_RX_STA&0X7FFF;	//å¾—åˆ°æ•°æ®é•¿åº¦
 			for(i=0;i<rxlen;i++)USART1_TX_BUF[i]=USART3_RX_BUF[i];	   
- 			USART3_RX_STA=0;		   	//Æô¶¯ÏÂÒ»´Î½ÓÊÕ
-			USART1_TX_BUF[i]=0;			//×Ô¶¯Ìí¼Ó½áÊø·û
-			GPS_Analysis(&gpsx,(u8*)USART1_TX_BUF);//·ÖÎö×Ö·û´®
+ 			USART3_RX_STA=0;		   	//å¯åŠ¨ä¸‹ä¸€æ¬¡æ¥æ”¶
+			USART1_TX_BUF[i]=0;			//è‡ªåŠ¨æ·»åŠ ç»“æŸç¬¦
+			GPS_Analysis(&gpsx,(u8*)USART1_TX_BUF);//åˆ†æå­—ç¬¦ä¸²
 			if(flag_draw)
 			{
 				/*
@@ -101,10 +101,10 @@ int main(void)
 				{
            x=gpsx.longitude;
 					 y=gpsx.latitude;
-				}//¼ä¸ô1s¼ÇÂ¼µ±Ç°Î»ÖÃ×ø±ê
+				}//é—´éš”1sè®°å½•å½“å‰ä½ç½®åæ ‡
 				n++;	
 				*/
-				//»æÖÆ¹ì¼£
+				//ç»˜åˆ¶è½¨è¿¹
 			 // LCD_DrawFRONT_COLOR(xt,yt,RED);
 				LCD_Draw_Circle(xt,yt,1);
 		    longitude2=gpsx.longitude;
@@ -119,14 +119,14 @@ int main(void)
 			}
 			else
 			{
-				//show_chinese(30,140,ı",RED,WHITE);  //YELLOW
-				Gps_Msg_Show();				//ÏÔÊ¾ĞÅÏ¢
+				//show_chinese(30,140,ï¿½",RED,WHITE);  //YELLOW
+				Gps_Msg_Show();				//æ˜¾ç¤ºä¿¡æ¯
 			}
 			
-			//if(!flag_demo) Gps_Msg_Show();				//ÏÔÊ¾ĞÅÏ¢
-			//if(upload)printf("\r\n%s\r\n",USART1_TX_BUF);//·¢ËÍ½ÓÊÕµ½µÄÊı¾İµ½´®¿Ú1
+			//if(!flag_demo) Gps_Msg_Show();				//æ˜¾ç¤ºä¿¡æ¯
+			//if(upload)printf("\r\n%s\r\n",USART1_TX_BUF);//å‘é€æ¥æ”¶åˆ°çš„æ•°æ®åˆ°ä¸²å£1
  		}
-		//½ÓÊÜÊı¾İ³É¹¦ÔòD1ÉÁË¸
+		//æ¥å—æ•°æ®æˆåŠŸåˆ™D1é—ªçƒ
 		if((lenx%100)==0)LED0=!LED0; 	    				 
 		lenx++;	
 	}
