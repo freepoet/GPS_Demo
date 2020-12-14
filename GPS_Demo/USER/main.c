@@ -7,16 +7,16 @@
 **--------------------------------------------------------------------------------------------------------*/	
 /**********************************************************
  
-	½ÓÏßËµÃ÷£º
+	æ¥çº¿è¯´æ˜ï¼š
 	STM32					MC20
 	3.3V	------>	V_IO
 	GND		<----->	GND
-	PA3		<------	GSM_TX
-	PA2		------>	GSM_RX
+	PB11		<------	GSM_TX
+	PB10		------>	GSM_RX
 	
 
-	//ÓÃÓÚµ÷ÊÔ¿É²»½Ó
-	STM32					USB-TTLÄ£¿é
+	//ç”¨äºè°ƒè¯•å¯ä¸æ¥
+	STM32					USB-TTLæ¨¡å—
 	GND		------>	GND
 	TX1/PA9		------>	RXD
 ***********************************************************/
@@ -27,12 +27,12 @@
 #include "led.h"
 #include "usart3.h"
 #include "tftlcd.h"
-//³£Á¿
+//å¸¸é‡
 #define Success 1U
 #define Failure 0U
 
-//¶¨Òå±äÁ¿
-unsigned long  Time_Cont = 0;       //¶¨Ê±Æ÷¼ÆÊıÆ÷
+//å®šä¹‰å˜é‡
+unsigned long  Time_Cont = 0;       //å®šæ—¶å™¨è®¡æ•°å™¨
 ////
 	char send_buf[400] = {0};
 	char text[200] = {0};
@@ -45,12 +45,12 @@ unsigned long  Time_Cont = 0;       //¶¨Ê±Æ÷¼ÆÊıÆ÷
 /////
 
 
-char OneNetServer[] = "183.230.40.33";       //²»ĞèÒªĞŞ¸Ä
+char OneNetServer[] = "183.230.40.33";       //ä¸éœ€è¦ä¿®æ”¹
 
 
-char device_id[] = "653603535";    //ĞŞ¸ÄÎª×Ô¼ºµÄÉè±¸ID
-char API_KEY[] = "ngjUkVFXgPv09b0vd0uzkvwEpsw=";    //ĞŞ¸ÄÎª×Ô¼ºµÄAPI_KEY
-char sensor_gps[] = "location";				//²»ĞèÒªĞŞ¸Ä
+char device_id[] = "653603535";    //ä¿®æ”¹ä¸ºè‡ªå·±çš„è®¾å¤‡ID
+char API_KEY[] = "ngjUkVFXgPv09b0vd0uzkvwEpsw=";    //ä¿®æ”¹ä¸ºè‡ªå·±çš„API_KEY
+char sensor_gps[] = "location";				//ä¸éœ€è¦ä¿®æ”¹
 
 unsigned int count = 0;
 
@@ -70,10 +70,10 @@ int main(void)
 {	
 	delay_init(168);
 	
-   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);	//ÉèÖÃNVICÖĞ¶Ï·Ö×é2:2Î»ÇÀÕ¼ÓÅÏÈ¼¶£¬2Î»ÏìÓ¦ÓÅÏÈ¼¶
-	uart_init(9600);	 //´®¿Ú³õÊ¼»¯Îª9600
-	usart3_init(9600);	//´®¿Ú2²¨ÌØÂÊ9600
-	TFTLCD_Init();			 			//³õÊ¼»¯LCD
+   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);	//è®¾ç½®NVICä¸­æ–­åˆ†ç»„2:2ä½æŠ¢å ä¼˜å…ˆçº§ï¼Œ2ä½å“åº”ä¼˜å…ˆçº§
+	uart_init(9600);	 //ä¸²å£åˆå§‹åŒ–ä¸º9600
+	usart3_init(9600);	//ä¸²å£2æ³¢ç‰¹ç‡9600
+	TFTLCD_Init();			 			//åˆå§‹åŒ–LCD
 	u3_printf("AT\r\n");
 	//Init_LEDpin();
 
@@ -88,8 +88,8 @@ int main(void)
 	else errorLog(3);
 	delay_ms(10);
 
-	if (sendCommand("AT+CREG?\r\n", ",1", 3000, 10) == Success);	//±¾µØSIM¿¨
-	else if(sendCommand("AT+CREG?\r\n", ",5", 3000, 10) == Success	);//ÂşÓÎSIM¿¨
+	if (sendCommand("AT+CREG?\r\n", ",1", 3000, 10) == Success);	//æœ¬åœ°SIMå¡
+	else if(sendCommand("AT+CREG?\r\n", ",5", 3000, 10) == Success	);//æ¼«æ¸¸SIMå¡
 	else	errorLog(3);
 	delay_ms(10);
 
@@ -98,7 +98,7 @@ int main(void)
 	else errorLog(5);
 
 	clrStruct();
-	LCD_Fill(40,110,320,110+24,WHITE);//Çå³ıÏÔÊ¾ 
+	LCD_Fill(40,110,320,110+24,WHITE);//æ¸…é™¤æ˜¾ç¤º 
 	LCD_ShowString(40,110,300,24,24,"Initialized OK!");   
 	delay_ms(100);
 	
@@ -108,11 +108,11 @@ int main(void)
 		else errorLog(6);
 
 		Save_Data.isGetData = true;
-		memset(Save_Data.GPS_Buffer, 0, GPS_Buffer_Length);      //Çå¿Õ
+		memset(Save_Data.GPS_Buffer, 0, GPS_Buffer_Length);      //æ¸…ç©º
 		memcpy(Save_Data.GPS_Buffer, USART3_RX_BUF, point2);
 		
 		printf("\r\n==========Save_Data.GPS_Buffer==========\r\n");
-		printf(Save_Data.GPS_Buffer); //Êä³ö½ÓÊÕµ½µÄĞÅÏ¢
+		printf(Save_Data.GPS_Buffer); //è¾“å‡ºæ¥æ”¶åˆ°çš„ä¿¡æ¯
 		printf("\r\n");
 		parseGpsBuffer();
 		printGpsBuffer();
@@ -140,7 +140,7 @@ void parseGpsBuffer()
 			if (i == 0)
 			{
 				if ((subString = strstr(Save_Data.GPS_Buffer, ",")) == NULL)
-					errorLog(1);	//½âÎö´íÎó
+					errorLog(1);	//è§£æé”™è¯¯
 			}
 			else
 			{
@@ -150,12 +150,12 @@ void parseGpsBuffer()
 					char usefullBuffer[2]; 
 					switch(i)
 					{
-						case 1:memcpy(Save_Data.UTCTime, subString, subStringNext - subString);break;	//»ñÈ¡UTCÊ±¼ä
-						case 2:memcpy(usefullBuffer, subString, subStringNext - subString);break;	//»ñÈ¡UTCÊ±¼ä
-						case 3:memcpy(Save_Data.latitude, subString, subStringNext - subString);break;	//»ñÈ¡Î³¶ÈĞÅÏ¢
-						case 4:memcpy(Save_Data.N_S, subString, subStringNext - subString);break;	//»ñÈ¡N/S
-						case 5:memcpy(Save_Data.longitude, subString, subStringNext - subString);break;	//»ñÈ¡¾­¶ÈĞÅÏ¢
-						case 6:memcpy(Save_Data.E_W, subString, subStringNext - subString);break;	//»ñÈ¡E/W
+						case 1:memcpy(Save_Data.UTCTime, subString, subStringNext - subString);break;	//è·å–UTCæ—¶é—´
+						case 2:memcpy(usefullBuffer, subString, subStringNext - subString);break;	//è·å–UTCæ—¶é—´
+						case 3:memcpy(Save_Data.latitude, subString, subStringNext - subString);break;	//è·å–çº¬åº¦ä¿¡æ¯
+						case 4:memcpy(Save_Data.N_S, subString, subStringNext - subString);break;	//è·å–N/S
+						case 5:memcpy(Save_Data.longitude, subString, subStringNext - subString);break;	//è·å–ç»åº¦ä¿¡æ¯
+						case 6:memcpy(Save_Data.E_W, subString, subStringNext - subString);break;	//è·å–E/W
 
 						default:break;
 					}
@@ -170,7 +170,7 @@ void parseGpsBuffer()
 				}
 				else
 				{
-					errorLog(2);	//½âÎö´íÎó
+					errorLog(2);	//è§£æé”™è¯¯
 				}
 			}
 
@@ -210,7 +210,7 @@ void printGpsBuffer()
 			printf("\r\n");
 			
 			
-			postGpsDataToOneNet(API_KEY, device_id, sensor_gps, Save_Data.longitude, Save_Data.latitude);		//·¢ËÍÊı¾İµ½Onenet
+			postGpsDataToOneNet(API_KEY, device_id, sensor_gps, Save_Data.longitude, Save_Data.latitude);		//å‘é€æ•°æ®åˆ°Onenet
 			
 			LED1 = 0;
 			delay_ms(100);
@@ -234,7 +234,7 @@ int Digcount(long num)
   return i;
 }
 
-char* longitudeToOnenetFormat(char *lon_str_temp) 		//¾­¶È
+char* longitudeToOnenetFormat(char *lon_str_temp) 		//ç»åº¦
 {
 	unsigned long lon_Onenet = 0;
 	unsigned int dd_int = 0;
@@ -248,20 +248,20 @@ char* longitudeToOnenetFormat(char *lon_str_temp) 		//¾­¶È
 	char point_result[20];
 	int pointLength = 0;
 
-	//51µ¥Æ¬»úÃ»ÓĞdouble£¬doubleºÍfloat£¬¾«¶È²»¹»£¬ÕâÀïÖ»ÄÜ·Ö¿ªÕûÊıºÍĞ¡Êı»»Ëã¡£
+	//51å•ç‰‡æœºæ²¡æœ‰doubleï¼Œdoubleå’Œfloatï¼Œç²¾åº¦ä¸å¤Ÿï¼Œè¿™é‡Œåªèƒ½åˆ†å¼€æ•´æ•°å’Œå°æ•°æ¢ç®—ã€‚
 	sscanf(lon_str_temp, "%ld.%ld", &tempInt,&tempPoint);
 	lon_Onenet = tempInt%100;
 	pointLength = strlen(lon_str_temp) - 1 - Digcount(tempInt);		
-	for( i = 0 ; i < pointLength ; i++)	//Ğ¡Êıµã¼¸Î»£¬ÕûÊı²¿·Ö¾Í·Å´ó10µÄ¼¸´Î·½
+	for( i = 0 ; i < pointLength ; i++)	//å°æ•°ç‚¹å‡ ä½ï¼Œæ•´æ•°éƒ¨åˆ†å°±æ”¾å¤§10çš„å‡ æ¬¡æ–¹
 	{
 		lon_Onenet *= 10; 	
 	}
 
-	dd_int = tempInt / 100; //È¡³ödd
+	dd_int = tempInt / 100; //å–å‡ºdd
 
-	mm_int = lon_Onenet + tempPoint; //È¡³öMM²¿·Ö
+	mm_int = lon_Onenet + tempPoint; //å–å‡ºMMéƒ¨åˆ†
 
-	mm_int = mm_int*10/6;	 		//±¾À´ÊÇ³ıÒÔ60£¬ÕâÀï*10/6ÎªÁË¶à2Î»Ğ¡ÊıµãÓĞÓĞĞ§Êı×Ö
+	mm_int = mm_int*10/6;	 		//æœ¬æ¥æ˜¯é™¤ä»¥60ï¼Œè¿™é‡Œ*10/6ä¸ºäº†å¤š2ä½å°æ•°ç‚¹æœ‰æœ‰æ•ˆæ•°å­—
 
 
    	sprintf(result,"%d.",dd_int);
@@ -279,7 +279,7 @@ char* longitudeToOnenetFormat(char *lon_str_temp) 		//¾­¶È
 
 
 
-char* latitudeToOnenetFormat(char *lat_str_temp) 		//Î³¶È
+char* latitudeToOnenetFormat(char *lat_str_temp) 		//çº¬åº¦
 {
 	unsigned long lat_Onenet = 0;
 	int dd_int = 0;
@@ -294,7 +294,7 @@ char* latitudeToOnenetFormat(char *lat_str_temp) 		//Î³¶È
 	int pointLength = 0;
 //	char xdata debugTest[30];
 	
-	//51µ¥Æ¬»úÃ»ÓĞdouble£¬doubleºÍfloat£¬¾«¶È²»¹»£¬ÕâÀïÖ»ÄÜ·Ö¿ªÕûÊıºÍĞ¡Êı»»Ëã¡£
+	//51å•ç‰‡æœºæ²¡æœ‰doubleï¼Œdoubleå’Œfloatï¼Œç²¾åº¦ä¸å¤Ÿï¼Œè¿™é‡Œåªèƒ½åˆ†å¼€æ•´æ•°å’Œå°æ•°æ¢ç®—ã€‚
 	sscanf(lat_str_temp, "%ld.%ld", &tempInt,&tempPoint);
 	lat_Onenet = tempInt%100;
 	
@@ -307,7 +307,7 @@ char* latitudeToOnenetFormat(char *lat_str_temp) 		//Î³¶È
 //	SendString("\r\n==========ONENET FORMART pointLength==========\r\n");
 //	sprintf(debugTest,"%d",pointLength);
 //	SendString(debugTest);
-	for( i = 0 ; i < pointLength ; i++)	//Ğ¡Êıµã¼¸Î»£¬ÕûÊı²¿·Ö¾Í·Å´ó10µÄ¼¸´Î·½
+	for( i = 0 ; i < pointLength ; i++)	//å°æ•°ç‚¹å‡ ä½ï¼Œæ•´æ•°éƒ¨åˆ†å°±æ”¾å¤§10çš„å‡ æ¬¡æ–¹
 	{
 		lat_Onenet *= 10; 	
 	}
@@ -324,11 +324,11 @@ char* latitudeToOnenetFormat(char *lat_str_temp) 		//Î³¶È
 //	sprintf(debugTest,"%ld",lat_Onenet);
 //	SendString(debugTest);
 
-	dd_int = tempInt / 100; //È¡³ödd
+	dd_int = tempInt / 100; //å–å‡ºdd
 
-	mm_int = lat_Onenet + tempPoint; //È¡³öMM²¿·Ö
+	mm_int = lat_Onenet + tempPoint; //å–å‡ºMMéƒ¨åˆ†
 
-	mm_int = mm_int*10/6;	 		//±¾À´ÊÇ³ıÒÔ60£¬ÕâÀï*10/6ÎªÁË¶à2Î»Ğ¡ÊıµãÓĞÓĞĞ§Êı×Ö
+	mm_int = mm_int*10/6;	 		//æœ¬æ¥æ˜¯é™¤ä»¥60ï¼Œè¿™é‡Œ*10/6ä¸ºäº†å¤š2ä½å°æ•°ç‚¹æœ‰æœ‰æ•ˆæ•°å­—
 
 //	SendString("\r\n==========ONENET FORMART mm_int==========\r\n");
 //	sprintf(debugTest,"%ld",mm_int);
@@ -354,8 +354,8 @@ void postGpsDataToOneNet(char* API_VALUE_temp, char* device_id_temp, char* senso
 {
 
 
-//	dtostrf(longitudeToOnenetFormat(lon_temp), 3, 6, lon_str_end); //×ª»»³É×Ö·û´®Êä³ö
-//	dtostrf(latitudeToOnenetFormat(lat_temp), 2, 6, lat_str_end); //×ª»»³É×Ö·û´®Êä³ö
+//	dtostrf(longitudeToOnenetFormat(lon_temp), 3, 6, lon_str_end); //è½¬æ¢æˆå­—ç¬¦ä¸²è¾“å‡º
+//	dtostrf(latitudeToOnenetFormat(lat_temp), 2, 6, lat_str_end); //è½¬æ¢æˆå­—ç¬¦ä¸²è¾“å‡º
 
 //	lon_temp = "11224.4992";
 //	lat_temp = "3438.1633";
@@ -363,37 +363,37 @@ void postGpsDataToOneNet(char* API_VALUE_temp, char* device_id_temp, char* senso
 	sprintf(lon_str_end,"%s", longitudeToOnenetFormat(lon_temp)); 
 	sprintf(lat_str_end,"%s", latitudeToOnenetFormat(lat_temp)); 
 
-	//Á¬½Ó·şÎñÆ÷
-	memset(send_buf, 0, 400);    //Çå¿Õ
+	//è¿æ¥æœåŠ¡å™¨
+	memset(send_buf, 0, 400);    //æ¸…ç©º
 	strcpy(send_buf, "AT+QIOPEN=\"TCP\",\"");
 	strcat(send_buf, OneNetServer);
 	strcat(send_buf, "\",\"80\"\r\n");
 	if (sendCommand(send_buf, "CONNECT", 10000, 3) == Success);
 	else errorLog(7);
 
-	//·¢ËÍÊı¾İ
+	//å‘é€æ•°æ®
 	if (sendCommand("AT+QISEND\r\n", ">", 3000, 1) == Success);
 	else errorLog(8);
 
-	memset(send_buf, 0, 400);    //Çå¿Õ
+	memset(send_buf, 0, 400);    //æ¸…ç©º
 
-	/*×¼±¸JSON´®*/
-	//ARDUINOÆ½Ì¨²»Ö§³ÖsprintfµÄdoubleµÄ´òÓ¡£¬Ö»ÄÜ×ª»»µ½×Ö·û´®È»ºó´òÓ¡
+	/*å‡†å¤‡JSONä¸²*/
+	//ARDUINOå¹³å°ä¸æ”¯æŒsprintfçš„doubleçš„æ‰“å°ï¼Œåªèƒ½è½¬æ¢åˆ°å­—ç¬¦ä¸²ç„¶åæ‰“å°
 	sprintf(text, "{\"datastreams\":[{\"id\":\"%s\",\"datapoints\":[{\"value\":{\"lon\":%s,\"lat\":%s}}]}]}"
 	        , sensor_id_temp, lon_str_end, lat_str_end);
 
-	/*×¼±¸HTTP±¨Í·*/
+	/*å‡†å¤‡HTTPæŠ¥å¤´*/
 	send_buf[0] = 0;
 	strcat(send_buf, "POST /devices/");
 	strcat(send_buf, device_id_temp);
-	strcat(send_buf, "/datapoints HTTP/1.1\r\n"); //×¢ÒâºóÃæ±ØĞë¼ÓÉÏ\r\n
+	strcat(send_buf, "/datapoints HTTP/1.1\r\n"); //æ³¨æ„åé¢å¿…é¡»åŠ ä¸Š\r\n
 	strcat(send_buf, "api-key:");
 	strcat(send_buf, API_VALUE_temp);
 	strcat(send_buf, "\r\n");
 	strcat(send_buf, "Host:");
 	strcat(send_buf, OneNetServer);
 	strcat(send_buf, "\r\n");
-	sprintf(tmp, "Content-Length:%d\r\n\r\n", strlen(text)); //¼ÆËãJSON´®³¤¶È
+	sprintf(tmp, "Content-Length:%d\r\n\r\n", strlen(text)); //è®¡ç®—JSONä¸²é•¿åº¦
 	strcat(send_buf, tmp);
 	strcat(send_buf, text);
 
@@ -419,7 +419,7 @@ void postGpsDataToOneNet(char* API_VALUE_temp, char* device_id_temp, char* senso
 void sendMessage(char *number,char *msg)
 {
 	char send_buf[20] = {0};
-	memset(send_buf, 0, 20);    //Çå¿Õ
+	memset(send_buf, 0, 20);    //æ¸…ç©º
 	strcpy(send_buf, "AT+CMGS=\"");
 	strcat(send_buf, number);
 	strcat(send_buf, "\"\r\n");
@@ -431,7 +431,7 @@ void sendMessage(char *number,char *msg)
 	else errorLog(7);
 	delay_ms(100);
 
-	memset(send_buf, 0, 100);    //Çå¿Õ
+	memset(send_buf, 0, 100);    //æ¸…ç©º
 	send_buf[0] = 0x1a;
 	if (sendCommand(send_buf, "OK\r\n", 10000, 5) == Success);
 	else errorLog(8);
@@ -459,7 +459,7 @@ void Sys_Soft_Reset(void)
 void phone(char *number)
 {
 	char send_buf[20] = {0};
-	memset(send_buf, 0, 20);    //Çå¿Õ
+	memset(send_buf, 0, 20);    //æ¸…ç©º
 	strcpy(send_buf, "ATD");
 	strcat(send_buf, number);
 	strcat(send_buf, ";\r\n");
@@ -474,7 +474,7 @@ unsigned int sendCommand(char *Command, char *Response, unsigned long Timeout, u
 	USART3_CLR_Buf();
 	for (n = 0; n < Retry; n++)
 	{
-		u3_printf(Command); 		//·¢ËÍGPRSÖ¸Áî
+		u3_printf(Command); 		//å‘é€GPRSæŒ‡ä»¤
 		
 		printf("\r\n***************send****************\r\n");
 		printf(Command);
